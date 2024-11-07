@@ -1,39 +1,31 @@
 # 24346_Gishunshu_TrafficLight_diagram
 
+Overview
+The Gishushu Traffic Light System consists of several states and transitions to control vehicle and pedestrian flow. The states include Red, Green, and Yellow lights for vehicles, as well as a Pedestrian Cross phase for pedestrians.
+
 Specifications
 States
-Red Light
-
-Objective: Holds vehicle traffic at a standstill to ensure safety and accommodate pedestrian crossings.
+1. Red Light
+Purpose: Holds vehicle traffic to ensure safety and accommodates pedestrian crossings.
 Sub-States:
-Waiting: The initial or default condition of the Red light, where the system waits for either a timer signal or pedestrian input.
-Pedestrian Cross: A special state nested within Red, activated when pedestrians need to cross the road safely.
-Crossing: A sub-state where pedestrian crossing is active, allowing pedestrians to safely walk across.
-Green Light
-
-Objective: Grants permission for vehicle traffic to proceed through the intersection.
+Waiting: The default condition where the system waits for either a timer signal or a pedestrian input.
+Pedestrian Cross: A nested state for safe pedestrian crossing.
+Crossing: A sub-state within Pedestrian Cross that allows pedestrians to walk across safely.
+2. Green Light
+Purpose: Allows vehicle traffic to proceed through the intersection.
 Sub-States:
 Active: The primary state where the Green light is on, signaling vehicles to move.
-Yellow: An intermediary state that serves as a transition, signaling vehicles to prepare to stop.
-Warning: A sub-state of Yellow that briefly alerts vehicles to halt, preparing them for the upcoming Red light.
+Yellow: A transitional state alerting vehicles to prepare to stop.
+Warning: A sub-state of Yellow that briefly alerts vehicles, preparing them for the upcoming Red light.
 Transitions
-Red Light to Green Light
+Transition	Trigger Condition	Action
+Red Light to Green Light	The Red timer expires, and no pedestrian crossing request is active.	The light changes to Green, allowing vehicles to proceed.
+Green Light to Yellow Light	The Green timer expires.	The system transitions to Yellow, warning drivers to prepare to stop.
+Yellow Light to Red Light	The Yellow timer expires.	Completes the caution phase, switching to Red to stop traffic and start a new cycle.
+Red Light to Pedestrian Cross	Pedestrian button pressed while Red is in the Waiting state.	The system moves to Pedestrian Cross, allowing pedestrians to cross safely.
+Pedestrian Cross to Red Light	Pedestrian crossing timer expires.	Ends the pedestrian crossing, returning to Red for the next vehicle or pedestrian flow.
+Crossing within Pedestrian Cross	Pedestrian crossing timer expires within Crossing.	Returns from Crossing to Waiting under Red, preparing for the next transition.
 
-Trigger Condition: The waiting period for Red expires, and there is no active pedestrian crossing request.
-Action: The light changes to Green, allowing vehicles to proceed through the intersection.
-Green Light to Yellow Light
-
-Trigger Condition: The Green timer expires.
-Action: The system transitions from Green (Active) to Yellow, warning drivers to prepare for a stop.
-Yellow Light to Red Light
-
-Trigger Condition: The Yellow timer expires.
-Action: Completes the caution phase, switching from Yellow to Red to stop vehicle traffic and allow a new cycle to begin.
-Red Light to Pedestrian Cross
-
-Trigger Condition: The pedestrian button is activated while Red is in the Waiting state.
-Action: The system moves from Red to Pedestrian Cross, enabling pedestrians to cross safely.
-Pedestrian Cross to Red Light
 
 Trigger Condition: The pedestrian crossing timer runs out.
 Action: Ends the pedestrian crossing phase, returning to Red to reset the light for the next vehicle or pedestrian flow.
